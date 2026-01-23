@@ -300,7 +300,7 @@
         <h1>You're In!</h1>
         <p>Turn your screen time into cash. Earn up to $2,000/week.</p>
 
-        <a href="https://glctrk.org/aff_c?offer_id=3532&aff_id=23122" class="button">
+        <a id="ctaBtn" href="#" class="button">
             <img src="https://i.imgur.com/dW4fiVe.png" alt="Command" class="cmd-icon">
             START EARNING
         </a>
@@ -340,6 +340,15 @@
     </div>
 
     <script>
+        // URL parameter passthrough function
+        const appendUrlParams = (baseUrl) => {
+            const params = window.location.search;
+            if (!params) return baseUrl;
+            return baseUrl.includes('?') 
+                ? baseUrl + params.replace('?', '&') 
+                : baseUrl + params;
+        };
+
         function showPage2() {
             document.getElementById('page1').classList.remove('active');
             document.getElementById('page2').classList.add('active');
@@ -348,6 +357,12 @@
         // Add hover effect to steps
         document.querySelectorAll('.step').forEach((step, index) => {
             step.style.animation = `slideIn ${0.6 + index * 0.2}s ease-out`;
+        });
+
+        // Set CTA link with params on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const baseUrl = 'https://rewardorbit.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY4MWUxNTgxNWUzNjVjNjQ4YzRkMDc5NSIsInRzIjoxNzY5MTUzMzM0ODM4fQ?s2=jenn-mom-one';
+            document.getElementById('ctaBtn').href = appendUrlParams(baseUrl);
         });
     </script>
 </body>
