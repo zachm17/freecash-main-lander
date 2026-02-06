@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Paid to Scroll</title>
+    <title>FREECASH</title>
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -28,9 +28,9 @@
         }
 
         @keyframes glowing {
-            0% { box-shadow: 0 0 10px rgba(74, 222, 128, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(74, 222, 128, 0.4); }
-            100% { box-shadow: 0 0 10px rgba(74, 222, 128, 0.2); }
+            0% { box-shadow: 0 0 10px rgba(0, 231, 1, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(0, 231, 1, 0.4); }
+            100% { box-shadow: 0 0 10px rgba(0, 231, 1, 0.2); }
         }
 
         body {
@@ -81,10 +81,17 @@
         h1 {
             font-size: 48px;
             margin: 20px 0;
-            background: linear-gradient(90deg, #4ade80, #22c55e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            letter-spacing: -0.5px;
             animation: pulse 2s infinite;
+        }
+
+        .free {
+            color: #00E701;
+        }
+
+        .cash {
+            color: #ffffff;
         }
 
         p {
@@ -96,10 +103,10 @@
         }
 
         .button {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(45deg, #4ade80, #22c55e);
+            background: linear-gradient(45deg, #00E701, #00c201);
             color: #0a1419;
             padding: 16px 32px;
             border-radius: 100px;
@@ -109,13 +116,14 @@
             margin: 20px auto;
             transition: all 0.3s ease;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(74, 222, 128, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2);
+            width: 100%;
             max-width: 300px;
         }
 
         .button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 222, 128, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 231, 1, 0.3);
         }
 
         .button.secondary {
@@ -126,15 +134,15 @@
         }
 
         .button.secondary:hover {
-            border-color: #4ade80;
-            color: #4ade80;
-            background: rgba(74, 222, 128, 0.1);
+            border-color: #00E701;
+            color: #00E701;
+            background: rgba(0, 231, 1, 0.1);
         }
 
         .info {
             font-size: 14px;
             color: #64748b;
-            margin-top: 20px;
+            margin-top: 10px;
             animation: fadeIn 1s ease-out;
         }
 
@@ -157,15 +165,11 @@
         }
 
         .step.highlighted {
-            background: rgba(74, 222, 128, 0.1);
-            border: 2px solid #4ade80;
-            box-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
+            background: rgba(0, 231, 1, 0.1);
+            border: 2px solid #00E701;
+            box-shadow: 0 0 20px rgba(0, 231, 1, 0.2);
             transform: scale(1.02);
             animation: glowing 2s infinite;
-        }
-
-        .step.highlighted:hover {
-            transform: scale(1.03) translateX(5px);
         }
 
         .step.highlighted::before {
@@ -173,7 +177,7 @@
             position: absolute;
             top: -12px;
             right: 20px;
-            background: linear-gradient(45deg, #4ade80, #22c55e);
+            background: linear-gradient(45deg, #00E701, #00c201);
             color: #0a1419;
             padding: 4px 12px;
             border-radius: 12px;
@@ -183,7 +187,7 @@
         }
 
         .step-number {
-            background: linear-gradient(45deg, #4ade80, #22c55e);
+            background: linear-gradient(45deg, #00E701, #00c201);
             color: #0a1419;
             width: 30px;
             height: 30px;
@@ -195,27 +199,17 @@
             font-weight: bold;
         }
 
-        .step.highlighted .step-number {
-            background: linear-gradient(45deg, #4ade80, #22c55e);
-            box-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
-        }
-
-        .highlight-text {
-            color: #4ade80;
-            font-weight: bold;
-        }
-
         .checkmark {
             width: 60px;
             height: 60px;
-            background: linear-gradient(45deg, #4ade80, #22c55e);
+            background: linear-gradient(45deg, #00E701, #00c201);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             animation: checkmarkDrop 0.8s ease-out;
-            box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 231, 1, 0.3);
         }
 
         .checkmark::after {
@@ -233,8 +227,6 @@
             margin: 20px 0;
             text-align: left;
             backdrop-filter: blur(10px);
-            animation: fadeIn 1s ease-out;
-            transition: all 0.3s ease;
         }
 
         .important-box:hover {
@@ -242,10 +234,9 @@
             transform: translateY(-2px);
         }
 
-        .cmd-icon {
-            height: 20px;
-            width: auto;
-            margin-right: 10px;
+        .highlight-text {
+            color: #00E701;
+            font-weight: bold;
         }
 
         @media (max-width: 480px) {
@@ -261,11 +252,6 @@
                 padding: 14px 28px;
                 font-size: 16px;
             }
-
-            .step.highlighted::before {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
         }
     </style>
 </head>
@@ -278,14 +264,14 @@
             <img src="https://i.imgur.com/jFKnFwK.png" alt="Logo 2" class="logo">
         </div>
 
-        <h1>Get Paid to Scroll</h1>
-        <p>Join thousands earning daily by watching TikTok videos and cashing out instantly.</p>
+        <h1><span class="free">FREE</span><span class="cash">CASH</span></h1>
+        <p>Join thousands earning rewards daily through popular apps and digital platforms.</p>
 
         <a onclick="showPage2()" class="button">I'm over 21</a>
-        <div class="info">Instant Payouts: PayPal, CashApp, Venmo, Crypto & Wire</div>
+        <div class="info">Instant Rewards: PayPal, CashApp, Venmo, Crypto & Wire</div>
 
         <a onclick="showPage2()" class="button secondary">I'm under 21</a>
-        <div class="info">Limited Payouts: Wire Transfer Only</div>
+        <div class="info">Limited Rewards: Wire Transfer Only</div>
     </div>
 
     <!-- Page 2: You're In -->
@@ -298,31 +284,30 @@
 
         <div class="checkmark"></div>
         <h1>You're In!</h1>
-        <p>Turn your screen time into cash. Earn up to $2,000/week.</p>
+        <p>Turn your digital activity into rewards. Earn up to $2,000/week through surveys, games, and offers.</p>
 
-        <a id="ctaBtn" href="#" class="button">
-            <img src="https://i.imgur.com/dW4fiVe.png" alt="Command" class="cmd-icon">
-            START EARNING
+        <a href="https://rewardorbit.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY4MWUxNTgxNWUzNjVjNjQ4YzRkMDc5NSIsInRzIjoxNzcwMzU3NjAwMzY2fQ">
+            START EARNING REWARDS
         </a>
 
         <div style="margin-top: 40px;">
-            <h3 style="color: #94a3b8; font-weight: normal; margin-bottom: 20px;">YOUR EARNING JOURNEY</h3>
+            <h3 style="color: #94a3b8; font-weight: normal; margin-bottom: 20px;">YOUR REWARD JOURNEY</h3>
             
             <div class="step">
                 <span class="step-number">1</span>
                 Create your account
-                <div class="info">Get $5 instantly just for signing up</div>
+                <div class="info">Get $5 in rewards instantly just for signing up</div>
             </div>
 
             <div class="step highlighted">
                 <span class="step-number">2</span>
-                <span class="highlight-text">Unlock the TikTok offer</span>
-                <div class="info">Complete 1 offer to unlock the TikTok scroll offer</div>
+                <span class="highlight-text">Complete Featured Tasks</span>
+                <div class="info">Engage with popular apps and complete surveys to earn rewards</div>
             </div>
 
             <div class="step">
                 <span class="step-number">3</span>
-                Get paid
+                Get rewarded
                 <div class="info">Cash out via PayPal, crypto, bank, or gift cards</div>
             </div>
         </div>
@@ -333,45 +318,21 @@
                 <strong>Activation Required</strong>
                 <span style="background: linear-gradient(45deg, #ef4444, #dc2626); color: white; padding: 2px 8px; border-radius: 12px; margin-left: auto; font-size: 12px;">IMPORTANT</span>
             </div>
-            <div style="color: #94a3b8;">New users: Complete <span style="color: #4ade80;">2 quick offers</span> to unlock full access and start earning with TikTok videos.</div>
+            <div style="color: #94a3b8;">New users: Complete <span style="color: #00E701;">2 quick offers</span> to unlock full access to all reward opportunities.</div>
         </div>
 
-        <p style="margin-top: 40px;">Trusted by over 500,000 users earning money daily</p>
+        <p style="margin-top: 40px;">Trusted by over 500,000 users earning rewards daily through digital engagement</p>
     </div>
 
     <script>
-        // URL parameter passthrough function
-        const appendUrlParams = (baseUrl) => {
-            const params = window.location.search;
-            if (!params) return baseUrl;
-            return baseUrl.includes('?') 
-                ? baseUrl + params.replace('?', '&') 
-                : baseUrl + params;
-        };
-
         function showPage2() {
             document.getElementById('page1').classList.remove('active');
             document.getElementById('page2').classList.add('active');
         }
 
-        // Add hover effect to steps
         document.querySelectorAll('.step').forEach((step, index) => {
             step.style.animation = `slideIn ${0.6 + index * 0.2}s ease-out`;
-        });
-
-        // Set CTA link with params on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const baseUrl = 'https://rewardorbit.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY4MWUxNTgxNWUzNjVjNjQ4YzRkMDc5NSIsInRzIjoxNzcwMjgwMTMxMTUyfQ?s2=sam-zeeslc';
-            document.getElementById('ctaBtn').href = appendUrlParams(baseUrl);
         });
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
