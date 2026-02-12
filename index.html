@@ -281,7 +281,7 @@
         <h1>You're In!</h1>
         <p>Turn your digital activity into rewards. Earn up to $2,000/week through surveys, games, and offers.</p>
 
-        <a href="https://rewardorbit.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY4MWUxNTgxNWUzNjVjNjQ4YzRkMDc5NSIsInRzIjoxNzcwODQ4NjE3MDAwfQ" class="button">
+        <a id="ctaBtn" href="#" class="button">
             START EARNING REWARDS
         </a>
 
@@ -320,6 +320,15 @@
     </div>
 
     <script>
+        // URL parameter passthrough function
+        const appendUrlParams = (baseUrl) => {
+            const params = window.location.search;
+            if (!params) return baseUrl;
+            return baseUrl.includes('?') 
+                ? baseUrl + params.replace('?', '&') 
+                : baseUrl + params;
+        };
+
         function showPage2() {
             document.getElementById('page1').classList.remove('active');
             document.getElementById('page2').classList.add('active');
@@ -328,8 +337,12 @@
         document.querySelectorAll('.step').forEach((step, index) => {
             step.style.animation = `slideIn ${0.6 + index * 0.2}s ease-out`;
         });
+
+        // Set CTA link with params on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const baseUrl = 'https://rewardorbit.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY4MWUxNTgxNWUzNjVjNjQ4YzRkMDc5NSIsInRzIjoxNzcwODQ4NjE3MDAwfQ';
+            document.getElementById('ctaBtn').href = appendUrlParams(baseUrl);
+        });
     </script>
 </body>
 </html>
-
-
