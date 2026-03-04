@@ -5,351 +5,562 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FREECASH</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(16px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            70% { transform: scale(1.08); }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 18px rgba(74, 222, 128, 0.25); }
+            50% { box-shadow: 0 0 35px rgba(74, 222, 128, 0.5); }
         }
 
-        @keyframes checkmarkDrop {
-            0% { transform: translateY(-20px); opacity: 0; }
-            50% { transform: translateY(5px); }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes glowing {
-            0% { box-shadow: 0 0 10px rgba(0, 231, 1, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(0, 231, 1, 0.4); }
-            100% { box-shadow: 0 0 10px rgba(0, 231, 1, 0.2); }
+        @keyframes btnGlow {
+            0%, 100% { box-shadow: 0 4px 24px rgba(74, 222, 128, 0.45); }
+            50% { box-shadow: 0 4px 40px rgba(74, 222, 128, 0.75); }
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #0a1419 0%, #1a2730 100%);
-            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #060e0a;
+            color: #fff;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            justify-content: center;
+        }
+
+        .app-wrapper {
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-wrapper::before {
+            content: '';
+            position: fixed;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(20, 100, 50, 0.35) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .page {
-            max-width: 600px;
-            width: 90%;
-            margin: 40px auto;
-            padding: 20px;
             display: none;
-            animation: fadeIn 0.6s ease-out;
+            flex-direction: column;
+            align-items: center;
+            padding: 48px 24px 60px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .page.active {
+            display: flex;
+        }
+
+        .logo-wrap {
+            width: 90px;
+            height: 90px;
+            border-radius: 22px;
+            overflow: hidden;
+            background: #0f1f14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 36px;
+            box-shadow: 0 0 0 1px rgba(74,222,128,0.15), 0 8px 32px rgba(0,0,0,0.5);
+        }
+
+        .logo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* PAGE 1 */
+        .headline {
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1.15;
+            text-align: center;
+            color: #4ade80;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+        }
+
+        .subtext {
+            font-size: 16px;
+            color: #8fa89a;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 28px;
+            max-width: 340px;
+        }
+
+        .bonus-box {
+            width: 100%;
+            background: transparent;
+            border: 1.5px solid rgba(74, 222, 128, 0.35);
+            border-radius: 18px;
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 36px;
+            animation: glowPulse 3s infinite ease-in-out;
+        }
+
+        .bonus-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .bonus-text-main {
+            font-size: 20px;
+            font-weight: 800;
+            color: #4ade80;
+        }
+
+        .bonus-text-sub {
+            font-size: 12px;
+            font-weight: 700;
+            color: #6b7280;
+            letter-spacing: 0.8px;
+            margin-top: 2px;
+        }
+
+        .btn-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 20px 24px;
+            background: #4ade80;
+            border: none;
+            border-radius: 18px;
+            cursor: pointer;
+            text-align: center;
+            animation: btnGlow 2.5s infinite ease-in-out;
+            transition: transform 0.2s;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-primary-label {
+            font-size: 18px;
+            font-weight: 800;
+            color: #060e0a;
             display: block;
         }
 
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 40px;
-            animation: slideIn 0.8s ease-out;
+        .btn-primary-sub {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(6, 14, 10, 0.65);
+            margin-top: 4px;
+            display: block;
         }
 
-        .logo {
-            height: 40px;
-            width: auto;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.1);
-        }
-
-        h1 {
-            font-size: 48px;
-            margin: 20px 0;
-            font-weight: bold;
-            letter-spacing: -0.5px;
-            animation: pulse 2s infinite;
-        }
-
-        .free {
-            color: #00E701;
-        }
-
-        .cash {
-            color: #ffffff;
-        }
-
-        p {
-            font-size: 18px;
-            color: #94a3b8;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(45deg, #00E701, #00c201);
-            color: #0a1419;
-            padding: 16px 32px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
-            margin: 20px auto;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 231, 1, 0.2);
+        .btn-secondary {
             width: 100%;
-            max-width: 300px;
+            padding: 20px 24px;
+            background: #111c16;
+            border: 1.5px solid #1e2d24;
+            border-radius: 18px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
         }
 
-        .button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 231, 1, 0.3);
+        .btn-secondary:hover {
+            border-color: rgba(74, 222, 128, 0.3);
         }
 
-        .button.secondary {
-            background: transparent;
-            border: 2px solid #334155;
-            color: #94a3b8;
-            box-shadow: none;
+        .btn-secondary-label {
+            font-size: 18px;
+            font-weight: 800;
+            color: #4ade80;
+            display: block;
         }
 
-        .button.secondary:hover {
-            border-color: #00E701;
-            color: #00E701;
-            background: rgba(0, 231, 1, 0.1);
+        .btn-secondary-sub {
+            font-size: 13px;
+            font-weight: 500;
+            color: #4b6358;
+            margin-top: 4px;
+            display: block;
         }
 
-        .info {
-            font-size: 14px;
-            color: #64748b;
-            margin-top: 10px;
-            animation: fadeIn 1s ease-out;
+        /* PAGE 2 */
+        .youre-in-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            animation: popIn 0.6s ease-out;
         }
 
-        .step {
-            background: rgba(30, 41, 59, 0.5);
-            padding: 20px;
-            border-radius: 16px;
-            margin: 20px 0;
-            text-align: left;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: slideIn 0.6s ease-out;
-            position: relative;
+        .check-circle {
+            width: 56px;
+            height: 56px;
+            background: #4ade80;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
         }
 
-        .step:hover {
-            transform: translateX(5px);
-            background: rgba(30, 41, 59, 0.7);
-        }
-
-        .step.highlighted {
-            background: rgba(0, 231, 1, 0.1);
-            border: 2px solid #00E701;
-            box-shadow: 0 0 20px rgba(0, 231, 1, 0.2);
-            transform: scale(1.02);
-            animation: glowing 2s infinite;
-        }
-
-        .step.highlighted::before {
-            content: "FEATURED";
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: linear-gradient(45deg, #00E701, #00c201);
-            color: #0a1419;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-        }
-
-        .step-number {
-            background: linear-gradient(45deg, #00E701, #00c201);
-            color: #0a1419;
+        .check-circle svg {
             width: 30px;
             height: 30px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            font-weight: bold;
+            stroke: #060e0a;
+            stroke-width: 3;
+            fill: none;
         }
 
-        .checkmark {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #00E701, #00c201);
+        .youre-in-text {
+            font-size: 40px;
+            font-weight: 900;
+            color: #4ade80;
+            letter-spacing: -0.5px;
+        }
+
+        .qualified-text {
+            font-size: 16px;
+            color: #8fa89a;
+            text-align: center;
+            line-height: 1.65;
+            margin-bottom: 28px;
+            max-width: 320px;
+        }
+
+        .qualified-text span {
+            color: #4ade80;
+            font-weight: 700;
+        }
+
+        .btn-download {
+            width: 100%;
+            padding: 22px 24px;
+            background: #4ade80;
+            border: none;
+            border-radius: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            animation: btnGlow 2.5s infinite ease-in-out;
+            transition: transform 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-download:active {
+            transform: scale(0.97);
+        }
+
+        .apple-icon {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .btn-download-label {
+            font-size: 17px;
+            font-weight: 900;
+            color: #060e0a;
+            letter-spacing: 0.3px;
+            text-align: left;
+            line-height: 1.3;
+        }
+
+        .typical-text {
+            font-size: 13px;
+            color: #4b6358;
+            font-style: italic;
+            margin-top: 12px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .journey-card {
+            width: 100%;
+            background: #0d1810;
+            border-radius: 20px;
+            padding: 24px 20px;
+            margin-bottom: 20px;
+            border: 1px solid #1a2820;
+        }
+
+        .journey-title {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #4b6358;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .journey-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 18px 0;
+            border-bottom: 1px solid #1a2820;
+        }
+
+        .journey-step:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .journey-step:first-of-type {
+            padding-top: 0;
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            background: #4ade80;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            animation: checkmarkDrop 0.8s ease-out;
-            box-shadow: 0 4px 15px rgba(0, 231, 1, 0.3);
+            font-size: 15px;
+            font-weight: 900;
+            color: #060e0a;
+            flex-shrink: 0;
+            margin-top: 2px;
         }
 
-        .checkmark::after {
-            content: '✓';
-            color: #0a1419;
-            font-size: 35px;
-            font-weight: bold;
+        .step-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: #5a7a68;
+            line-height: 1.5;
         }
 
         .important-box {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 16px;
+            width: 100%;
+            background: #0d1810;
+            border: 1.5px solid #dc2626;
+            border-radius: 18px;
             padding: 20px;
-            margin: 20px 0;
-            text-align: left;
-            backdrop-filter: blur(10px);
+            position: relative;
+            margin-bottom: 28px;
         }
 
-        .important-box:hover {
-            border-color: #ef4444;
-            transform: translateY(-2px);
+        .important-badge {
+            position: absolute;
+            top: -13px;
+            right: 18px;
+            background: #dc2626;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 3px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
         }
 
-        .highlight-text {
-            color: #00E701;
-            font-weight: bold;
+        .important-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 36px;
-            }
-            
-            .logo {
-                height: 30px;
-            }
+        .lock-icon {
+            font-size: 20px;
+        }
 
-            .button {
-                padding: 14px 28px;
-                font-size: 16px;
-            }
+        .important-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .important-desc {
+            font-size: 14px;
+            color: #5a7a68;
+            line-height: 1.6;
+        }
+
+        .important-desc span {
+            color: #4ade80;
+            font-weight: 700;
+        }
+
+        .trusted-text {
+            font-size: 13px;
+            color: #3a5248;
+            text-align: center;
+        }
+
+        @media (max-width: 380px) {
+            .headline { font-size: 32px; }
+            .youre-in-text { font-size: 34px; }
+            .page { padding: 36px 18px 50px; }
         }
     </style>
 </head>
 <body>
-    <!-- Page 1: Age Verification -->
-    <div id="page1" class="page active">
-        <div class="logo-container">
-            <img src="https://i.imgur.com/jFKnFwK.png" alt="Logo" class="logo">
+<div class="app-wrapper">
+
+    <!-- PAGE 1 -->
+    <div class="page active" id="page1">
+        <div class="logo-wrap">
+            <img src="https://i.imgur.com/jFKnFwK.png" alt="Freecash Logo">
         </div>
 
-        <h1><span class="free">FREE</span><span class="cash">CASH</span></h1>
-        <p>Join thousands earning rewards daily through popular apps and digital platforms.</p>
+        <h1 class="headline">Get Paid to Be on Your Phone</h1>
 
-        <a onclick="showPage2()" class="button">I'm over 21</a>
-        <div class="info">Instant Rewards: PayPal, CashApp, Venmo, Crypto & Wire</div>
+        <p class="subtext">Join thousands earning daily by playing games, doing tasks and cashing out instantly.</p>
 
-        <a onclick="showPage2()" class="button secondary">I'm under 21</a>
-        <div class="info">Limited Rewards: Wire Transfer Only</div>
+        <div class="bonus-box">
+            <div class="bonus-icon">🎁</div>
+            <div>
+                <div class="bonus-text-main">$5 Sign-Up Bonus</div>
+                <div class="bonus-text-sub">FREE WHEN YOU DOWNLOAD TODAY</div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-primary" onclick="goToPage2()">
+                <span class="btn-primary-label">I'm over 21</span>
+                <span class="btn-primary-sub">Instant Payouts: PayPal, CashApp, Venmo, Crypto &amp; Wire</span>
+            </button>
+            <button class="btn-secondary" onclick="goToPage2()">
+                <span class="btn-secondary-label">I'm under 21</span>
+                <span class="btn-secondary-sub">Limited Payouts: Wire Transfer Only</span>
+            </button>
+        </div>
     </div>
 
-    <!-- Page 2: You're In -->
-    <div id="page2" class="page">
-        <div class="logo-container">
-            <img src="https://i.imgur.com/jFKnFwK.png" alt="Logo" class="logo">
+    <!-- PAGE 2 -->
+    <div class="page" id="page2">
+        <div class="logo-wrap">
+            <img src="https://i.imgur.com/jFKnFwK.png" alt="Freecash Logo">
         </div>
 
-        <div class="checkmark"></div>
-        <h1>You're In!</h1>
-        <p>Turn your digital activity into rewards. Earn up to $2,000/week through surveys, games, and offers.</p>
+        <div class="youre-in-row">
+            <div class="check-circle">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <div class="youre-in-text">You're In!</div>
+        </div>
 
-        <a id="ctaBtn" href="#" class="button">
-            START EARNING REWARDS
+        <p class="qualified-text">
+            Your account is pre-qualified for higher payouts. Download the app to activate your <span>$5 bonus</span> and full access.
+        </p>
+
+        <a id="ctaBtn" href="#" class="btn-download">
+            <img src="https://i.imgur.com/dW4fiVe.png" alt="Apple Logo" class="apple-icon">
+            <div class="btn-download-label">DOWNLOAD NOW — CLAIM $5 BONUS</div>
         </a>
 
-        <div style="margin-top: 40px;">
-            <h3 style="color: #94a3b8; font-weight: normal; margin-bottom: 20px;">YOUR REWARD JOURNEY</h3>
-            
-            <div class="step">
-                <span class="step-number">1</span>
-                Create your account
-                <div class="info">Get $5 in rewards instantly just for signing up</div>
+        <p class="typical-text">Typical users make $50 after completing a few deals</p>
+
+        <div class="journey-card">
+            <div class="journey-title">YOUR EARNING JOURNEY</div>
+
+            <div class="journey-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-title">Download &amp; Get Your $5 Bonus</div>
+                    <div class="step-desc">Available on iOS &amp; Android — Takes less than 60 seconds</div>
+                </div>
             </div>
 
-            <div class="step highlighted">
-                <span class="step-number">2</span>
-                <span class="highlight-text">Complete Featured Tasks</span>
-                <div class="info">Engage with popular apps and complete surveys to earn rewards</div>
+            <div class="journey-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-title">Complete Daily Offers</div>
+                    <div class="step-desc">Watch Netflix or YouTube while testing apps &amp; games, or completing surveys!</div>
+                </div>
             </div>
 
-            <div class="step">
-                <span class="step-number">3</span>
-                Get rewarded
-                <div class="info">Cash out via PayPal, crypto, bank, or gift cards</div>
+            <div class="journey-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-title">Cash Out Your Earnings</div>
+                    <div class="step-desc">Instant Payouts: PayPal, CashApp, Venmo, Crypto &amp; Wire</div>
+                </div>
             </div>
         </div>
 
         <div class="important-box">
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <span style="margin-right: 10px;">🔒</span>
-                <strong>Activation Required</strong>
-                <span style="background: linear-gradient(45deg, #ef4444, #dc2626); color: white; padding: 2px 8px; border-radius: 12px; margin-left: auto; font-size: 12px;">IMPORTANT</span>
+            <div class="important-badge">⚠️ IMPORTANT</div>
+            <div class="important-header">
+                <span class="lock-icon">🔒</span>
+                <span class="important-title">Activation Required</span>
             </div>
-            <div style="color: #94a3b8;">New users: Complete <span style="color: #00E701;">2 quick offers</span> to unlock full access to all reward opportunities.</div>
+            <p class="important-desc">New users: Complete <span>2 quick offers</span> to unlock full access and start earning.</p>
         </div>
 
-        <p style="margin-top: 40px;">Trusted by over 500,000 users earning rewards daily through digital engagement</p>
+        <p class="trusted-text">Trusted by over 500,000 users earning money daily</p>
     </div>
 
-    <script>
-        // URL parameter passthrough function
-        const appendUrlParams = (baseUrl) => {
-            const params = window.location.search;
-            if (!params) return baseUrl;
-            return baseUrl.includes('?') 
-                ? baseUrl + params.replace('?', '&') 
-                : baseUrl + params;
-        };
+</div>
 
-        function showPage2() {
-            document.getElementById('page1').classList.remove('active');
-            document.getElementById('page2').classList.add('active');
-        }
+<script>
+    // URL parameter passthrough function
+    const appendUrlParams = (baseUrl) => {
+        const params = window.location.search;
+        if (!params) return baseUrl;
+        return baseUrl.includes('?') 
+            ? baseUrl + params.replace('?', '&') 
+            : baseUrl + params;
+    };
 
-        document.querySelectorAll('.step').forEach((step, index) => {
-            step.style.animation = `slideIn ${0.6 + index * 0.2}s ease-out`;
-        });
+    function goToPage2() {
+        document.getElementById('page1').classList.remove('active');
+        document.getElementById('page2').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-        // Set CTA link with params on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const baseUrl = 'https://rewardorbit.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY4MWUxNTgxNWUzNjVjNjQ4YzRkMDc5NSIsInRzIjoxNzcyMjU3OTQ5ODM5fQ?s2=aub-custom-prof';
-            document.getElementById('ctaBtn').href = appendUrlParams(baseUrl);
-        });
-    </script>
+    // Set CTA link with params on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const baseUrl = 'https://rewardorbit.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY4MWUxNTgxNWUzNjVjNjQ4YzRkMDc5NSIsInRzIjoxNzcyNTgzNzg4NTI0fQ?s2=aub-yt-prof-two-cont-newland';
+        document.getElementById('ctaBtn').href = appendUrlParams(baseUrl);
+    });
+</script>
 </body>
 </html>
-
-
-
-
-
 
 
