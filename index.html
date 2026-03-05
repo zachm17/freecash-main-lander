@@ -1,479 +1,378 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FREECASH</title>
+    <title>Get Paid to Scroll</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 0 28px rgba(74,222,128,0.5); }
+            50%       { box-shadow: 0 0 52px rgba(74,222,128,0.85); }
+        }
         @keyframes popIn {
-            0% { transform: scale(0.7); opacity: 0; }
-            70% { transform: scale(1.08); }
-            100% { transform: scale(1); opacity: 1; }
+            0%   { transform: scale(0.6); opacity: 0; }
+            70%  { transform: scale(1.08); }
+            100% { transform: scale(1);   opacity: 1; }
+        }
+        @keyframes iconGlow {
+            0%, 100% { box-shadow: 0 8px 40px rgba(74,222,128,0.4); }
+            50%       { box-shadow: 0 8px 65px rgba(74,222,128,0.7); }
         }
 
-        @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 18px rgba(74, 222, 128, 0.25); }
-            50% { box-shadow: 0 0 35px rgba(74, 222, 128, 0.5); }
-        }
-
-        @keyframes btnGlow {
-            0%, 100% { box-shadow: 0 4px 24px rgba(74, 222, 128, 0.45); }
-            50% { box-shadow: 0 4px 40px rgba(74, 222, 128, 0.75); }
+        html {
+            height: 100%;
         }
 
         body {
+            min-height: 100%;
+            /* Full-screen dark background with centered green glow */
+            background-color: #050c07;
+            background-image:
+                radial-gradient(ellipse 80% 55% at 50% 0%,
+                    rgba(10, 80, 40, 0.75) 0%,
+                    rgba(5, 30, 15, 0.5) 45%,
+                    transparent 70%);
+            background-attachment: fixed;
+            background-size: 100% 100%;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #060e0a;
             color: #fff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .app-wrapper {
-            width: 100%;
+        .wrapper {
             max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
             position: relative;
-            overflow: hidden;
+            z-index: 1;
         }
 
-        .app-wrapper::before {
-            content: '';
-            position: fixed;
-            top: -10%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 420px;
-            height: 420px;
-            background: radial-gradient(circle, rgba(20, 100, 50, 0.35) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
+        /* ─── Pages ─── */
         .page {
             display: none;
             flex-direction: column;
             align-items: center;
-            padding: 48px 24px 60px;
+            padding: 70px 22px 80px;
             min-height: 100vh;
-            position: relative;
-            z-index: 1;
-            animation: fadeIn 0.5s ease-out;
         }
-
         .page.active {
             display: flex;
+            animation: fadeInUp 0.45s ease-out both;
         }
 
-        .logo-wrap {
-            width: 90px;
-            height: 90px;
-            border-radius: 22px;
+        /* ─── App Icon ─── */
+        .app-icon {
+            width: 95px;
+            height: 95px;
+            border-radius: 24px;
             overflow: hidden;
-            background: #0f1f14;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 36px;
-            box-shadow: 0 0 0 1px rgba(74,222,128,0.15), 0 8px 32px rgba(0,0,0,0.5);
-        }
-
-        .logo-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* PAGE 1 */
-        .headline {
-            font-size: 38px;
-            font-weight: 800;
-            line-height: 1.15;
-            text-align: center;
-            color: #4ade80;
-            letter-spacing: -0.5px;
-            margin-bottom: 16px;
-        }
-
-        .subtext {
-            font-size: 16px;
-            color: #8fa89a;
-            text-align: center;
-            line-height: 1.6;
-            margin-bottom: 28px;
-            max-width: 340px;
-        }
-
-        .bonus-box {
-            width: 100%;
-            background: transparent;
-            border: 1.5px solid rgba(74, 222, 128, 0.35);
-            border-radius: 18px;
-            padding: 18px 22px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 36px;
-            animation: glowPulse 3s infinite ease-in-out;
-        }
-
-        .bonus-icon {
-            font-size: 32px;
+            margin-bottom: 44px;
+            animation: iconGlow 3s ease-in-out infinite;
             flex-shrink: 0;
         }
-
-        .bonus-text-main {
-            font-size: 20px;
-            font-weight: 800;
-            color: #4ade80;
+        .app-icon img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .bonus-text-sub {
-            font-size: 12px;
-            font-weight: 700;
-            color: #6b7280;
-            letter-spacing: 0.8px;
-            margin-top: 2px;
+        /* ─── PAGE 1 ─── */
+        .headline {
+            font-size: 56px;
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            margin-bottom: 22px;
+            background: linear-gradient(165deg, #c5d5cb 0%, #4ade80 60%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .btn-group {
+        .sub {
+            font-size: 16.5px;
+            color: #7a9a88;
+            text-align: center;
+            line-height: 1.65;
+            margin-bottom: 56px;
+            max-width: 310px;
+        }
+
+        .btn-stack {
             width: 100%;
             display: flex;
             flex-direction: column;
             gap: 14px;
         }
 
-        .btn-primary {
+        .btn-green {
             width: 100%;
-            padding: 20px 24px;
+            padding: 22px 20px;
             background: #4ade80;
             border: none;
-            border-radius: 18px;
+            border-radius: 20px;
             cursor: pointer;
             text-align: center;
-            animation: btnGlow 2.5s infinite ease-in-out;
-            transition: transform 0.2s;
+            animation: btnPulse 2.8s ease-in-out infinite;
+            transition: transform 0.13s;
         }
+        .btn-green:active { transform: scale(0.97); }
 
-        .btn-primary:active {
-            transform: scale(0.97);
-        }
-
-        .btn-primary-label {
-            font-size: 18px;
-            font-weight: 800;
-            color: #060e0a;
+        .btn-green .b-main {
             display: block;
+            font-size: 20px;
+            font-weight: 900;
+            color: #060e09;
+            margin-bottom: 5px;
         }
-
-        .btn-primary-sub {
+        .btn-green .b-sub {
+            display: block;
             font-size: 13px;
+            color: rgba(6,14,9,0.55);
             font-weight: 500;
-            color: rgba(6, 14, 10, 0.65);
-            margin-top: 4px;
-            display: block;
         }
 
-        .btn-secondary {
+        .btn-dark {
             width: 100%;
-            padding: 20px 24px;
-            background: #111c16;
-            border: 1.5px solid #1e2d24;
-            border-radius: 18px;
+            padding: 22px 20px;
+            background: #0d1c13;
+            border: 1.5px solid #1c2e22;
+            border-radius: 20px;
             cursor: pointer;
             text-align: center;
-            transition: all 0.2s;
+            transition: border-color 0.2s, transform 0.13s;
         }
+        .btn-dark:hover  { border-color: rgba(74,222,128,0.3); }
+        .btn-dark:active { transform: scale(0.97); }
 
-        .btn-secondary:hover {
-            border-color: rgba(74, 222, 128, 0.3);
-        }
-
-        .btn-secondary-label {
-            font-size: 18px;
-            font-weight: 800;
-            color: #4ade80;
+        .btn-dark .b-main {
             display: block;
+            font-size: 20px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 5px;
         }
-
-        .btn-secondary-sub {
+        .btn-dark .b-sub {
+            display: block;
             font-size: 13px;
-            font-weight: 500;
             color: #4b6358;
-            margin-top: 4px;
-            display: block;
+            font-weight: 500;
         }
 
-        /* PAGE 2 */
+        /* ─── PAGE 2 ─── */
         .youre-in-row {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 18px;
             margin-bottom: 20px;
-            animation: popIn 0.6s ease-out;
+            animation: popIn 0.5s ease-out both;
         }
 
         .check-circle {
-            width: 56px;
-            height: 56px;
+            width: 66px; height: 66px;
             background: #4ade80;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+            box-shadow: 0 0 30px rgba(74,222,128,0.6);
         }
-
         .check-circle svg {
-            width: 30px;
-            height: 30px;
-            stroke: #060e0a;
-            stroke-width: 3;
+            width: 32px; height: 32px;
+            stroke: #060e09;
+            stroke-width: 3.5;
             fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .youre-in-text {
-            font-size: 40px;
+            font-size: 52px;
             font-weight: 900;
-            color: #4ade80;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            background: linear-gradient(165deg, #c5d5cb 0%, #4ade80 60%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .qualified-text {
+        .qualified {
             font-size: 16px;
-            color: #8fa89a;
+            color: #7a9a88;
             text-align: center;
-            line-height: 1.65;
-            margin-bottom: 28px;
-            max-width: 320px;
-        }
-
-        .qualified-text span {
-            color: #4ade80;
-            font-weight: 700;
+            line-height: 1.7;
+            margin-bottom: 34px;
+            max-width: 340px;
         }
 
         .btn-download {
             width: 100%;
-            padding: 22px 24px;
+            padding: 22px 28px;
             background: #4ade80;
             border: none;
-            border-radius: 18px;
+            border-radius: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 14px;
-            animation: btnGlow 2.5s infinite ease-in-out;
-            transition: transform 0.2s;
+            animation: btnPulse 2.8s ease-in-out infinite;
             text-decoration: none;
+            transition: transform 0.13s;
+            margin-bottom: 28px;
         }
-
-        .btn-download:active {
-            transform: scale(0.97);
-        }
-
-        .apple-icon {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-
-        .btn-download-label {
-            font-size: 17px;
+        .btn-download:active { transform: scale(0.97); }
+        .btn-download svg { width: 26px; height: 26px; fill: #060e09; flex-shrink: 0; }
+        .dl-text {
+            font-size: 21px;
             font-weight: 900;
-            color: #060e0a;
-            letter-spacing: 0.3px;
-            text-align: left;
-            line-height: 1.3;
+            color: #060e09;
+            letter-spacing: 1.5px;
         }
 
-        .typical-text {
-            font-size: 13px;
-            color: #4b6358;
-            font-style: italic;
-            margin-top: 12px;
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
+        /* Journey Card */
         .journey-card {
             width: 100%;
-            background: #0d1810;
-            border-radius: 20px;
-            padding: 24px 20px;
-            margin-bottom: 20px;
-            border: 1px solid #1a2820;
+            background: #0d1c13;
+            border-radius: 22px;
+            padding: 26px 20px 10px;
+            margin-bottom: 22px;
+            border: 1px solid #172519;
         }
-
-        .journey-title {
-            font-size: 13px;
+        .journey-label {
+            font-size: 11px;
             font-weight: 700;
-            letter-spacing: 1.5px;
+            letter-spacing: 2.5px;
             color: #4b6358;
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
         }
-
-        .journey-step {
+        .step {
             display: flex;
             align-items: flex-start;
             gap: 16px;
             padding: 18px 0;
-            border-bottom: 1px solid #1a2820;
+            border-top: 1px solid #172519;
         }
-
-        .journey-step:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .journey-step:first-of-type {
-            padding-top: 0;
-        }
+        .step:first-of-type { border-top: none; }
 
         .step-num {
-            width: 32px;
-            height: 32px;
+            width: 34px; height: 34px;
             background: #4ade80;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
             font-weight: 900;
-            color: #060e0a;
+            color: #060e09;
             flex-shrink: 0;
-            margin-top: 2px;
+            margin-top: 1px;
         }
-
         .step-title {
             font-size: 16px;
             font-weight: 800;
             color: #fff;
             margin-bottom: 5px;
         }
-
         .step-desc {
-            font-size: 14px;
-            color: #5a7a68;
+            font-size: 13.5px;
+            color: #527060;
             line-height: 1.5;
         }
 
+        /* Important Box */
         .important-box {
             width: 100%;
-            background: #0d1810;
-            border: 1.5px solid #dc2626;
+            background: #0d1c13;
+            border: 1.5px solid #b91c1c;
             border-radius: 18px;
-            padding: 20px;
+            padding: 22px 18px 20px;
             position: relative;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
-
-        .important-badge {
+        .imp-badge {
             position: absolute;
             top: -13px;
-            right: 18px;
+            right: 16px;
             background: #dc2626;
             color: #fff;
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 800;
-            padding: 3px 12px;
+            padding: 3px 13px;
             border-radius: 20px;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
-
-        .important-header {
+        .imp-header {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 10px;
         }
-
-        .lock-icon {
-            font-size: 20px;
-        }
-
-        .important-title {
-            font-size: 16px;
+        .imp-header span.lock { font-size: 20px; }
+        .imp-title {
+            font-size: 17px;
             font-weight: 800;
             color: #fff;
         }
-
-        .important-desc {
+        .imp-desc {
             font-size: 14px;
-            color: #5a7a68;
-            line-height: 1.6;
+            color: #527060;
+            line-height: 1.7;
         }
+        .imp-desc strong { color: #4ade80; font-weight: 800; }
 
-        .important-desc span {
-            color: #4ade80;
-            font-weight: 700;
-        }
-
-        .trusted-text {
+        .trusted {
             font-size: 13px;
-            color: #3a5248;
+            color: #354e3e;
             text-align: center;
         }
 
-        @media (max-width: 380px) {
-            .headline { font-size: 32px; }
-            .youre-in-text { font-size: 34px; }
-            .page { padding: 36px 18px 50px; }
+        @media (max-width: 360px) {
+            .headline { font-size: 44px; }
+            .youre-in-text { font-size: 40px; }
+            .app-icon { width: 80px; height: 80px; border-radius: 20px; }
+            .page { padding: 50px 16px 60px; }
         }
     </style>
 </head>
 <body>
-<div class="app-wrapper">
+<div class="wrapper">
 
-    <!-- PAGE 1 -->
+    <!-- ════════════ PAGE 1 ════════════ -->
     <div class="page active" id="page1">
-        <div class="logo-wrap">
-            <img src="https://i.imgur.com/jFKnFwK.png" alt="Freecash Logo">
+
+        <div class="app-icon">
+            <img src="https://i.imgur.com/1UmZT5o.png" alt="Freecash">
         </div>
 
-        <h1 class="headline">Get Paid to Be on Your Phone</h1>
+        <h1 class="headline">Get Paid to Scroll</h1>
 
-        <p class="subtext">Join thousands earning daily by playing games, doing tasks and cashing out instantly.</p>
+        <p class="sub">Join thousands earning daily by completing offers and cashing out instantly.</p>
 
-        <div class="bonus-box">
-            <div class="bonus-icon">🎁</div>
-            <div>
-                <div class="bonus-text-main">$5 Sign-Up Bonus</div>
-                <div class="bonus-text-sub">FREE WHEN YOU DOWNLOAD TODAY</div>
-            </div>
-        </div>
-
-        <div class="btn-group">
-            <button class="btn-primary" onclick="goToPage2()">
-                <span class="btn-primary-label">I'm over 21</span>
-                <span class="btn-primary-sub">Instant Payouts: PayPal, CashApp, Venmo, Crypto &amp; Wire</span>
+        <div class="btn-stack">
+            <button class="btn-green" onclick="goPage2()">
+                <span class="b-main">I'm over 21</span>
+                <span class="b-sub">Instant Payouts: PayPal, CashApp, Venmo, Crypto &amp; Wire</span>
             </button>
-            <button class="btn-secondary" onclick="goToPage2()">
-                <span class="btn-secondary-label">I'm under 21</span>
-                <span class="btn-secondary-sub">Limited Payouts: Wire Transfer Only</span>
+            <button class="btn-dark" onclick="goPage2()">
+                <span class="b-main">I'm under 21</span>
+                <span class="b-sub">Limited Payouts: Wire Transfer Only</span>
             </button>
         </div>
+
     </div>
 
-    <!-- PAGE 2 -->
+    <!-- ════════════ PAGE 2 ════════════ -->
     <div class="page" id="page2">
-        <div class="logo-wrap">
-            <img src="https://i.imgur.com/1UmZT5o.png" alt="Freecash Logo">
+
+        <div class="app-icon">
+            <img src="https://i.imgur.com/1UmZT5o.png" alt="Freecash">
         </div>
 
         <div class="youre-in-row">
@@ -485,39 +384,37 @@
             <div class="youre-in-text">You're In!</div>
         </div>
 
-        <p class="qualified-text">
-            Your account is pre-qualified for higher payouts. Download the app to activate your <span>$5 bonus</span> and full access.
-        </p>
+        <p class="qualified">Your account is pre-qualified for higher payouts. Download the app to activate full access.</p>
 
         <a id="ctaBtn" href="#" class="btn-download">
-            <img src="https://i.imgur.com/dW4fiVe.png" alt="Apple Logo" class="apple-icon">
-            <div class="btn-download-label">DOWNLOAD NOW — CLAIM $5 BONUS</div>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            <span class="dl-text">DOWNLOAD NOW</span>
         </a>
 
-        <p class="typical-text">Typical users make $50 after completing a few deals</p>
-
         <div class="journey-card">
-            <div class="journey-title">YOUR EARNING JOURNEY</div>
+            <div class="journey-label">Your Earning Journey</div>
 
-            <div class="journey-step">
+            <div class="step">
                 <div class="step-num">1</div>
-                <div class="step-content">
-                    <div class="step-title">Download &amp; Get Your $5 Bonus</div>
+                <div>
+                    <div class="step-title">Download the Freecash App</div>
                     <div class="step-desc">Available on iOS &amp; Android — Takes less than 60 seconds</div>
                 </div>
             </div>
 
-            <div class="journey-step">
+            <div class="step">
                 <div class="step-num">2</div>
-                <div class="step-content">
+                <div>
                     <div class="step-title">Complete Daily Offers</div>
-                    <div class="step-desc">Watch Netflix or YouTube while testing apps &amp; games, or completing surveys!</div>
+                    <div class="step-desc">Watch videos, test apps &amp; games, or take surveys!</div>
                 </div>
             </div>
 
-            <div class="journey-step">
+            <div class="step">
                 <div class="step-num">3</div>
-                <div class="step-content">
+                <div>
                     <div class="step-title">Cash Out Your Earnings</div>
                     <div class="step-desc">Instant Payouts: PayPal, CashApp, Venmo, Crypto &amp; Wire</div>
                 </div>
@@ -525,19 +422,19 @@
         </div>
 
         <div class="important-box">
-            <div class="important-badge">⚠️ IMPORTANT</div>
-            <div class="important-header">
-                <span class="lock-icon">🔒</span>
-                <span class="important-title">Activation Required</span>
+            <div class="imp-badge">⚠️ IMPORTANT</div>
+            <div class="imp-header">
+                <span class="lock">🔒</span>
+                <span class="imp-title">Activation Required</span>
             </div>
-            <p class="important-desc">New users: Complete <span>2 quick offers</span> to unlock full access and start earning.</p>
+            <p class="imp-desc">New users: Complete <strong>2 quick offers</strong> to unlock paid to scroll features and start earning rewards!</p>
         </div>
 
-        <p class="trusted-text">Trusted by over 500,000 users earning money daily</p>
+        <p class="trusted">Trusted by over 500,000 users earning money daily</p>
+
     </div>
 
 </div>
-
 <script>
     // URL parameter passthrough function
     const appendUrlParams = (baseUrl) => {
@@ -548,7 +445,7 @@
             : baseUrl + params;
     };
 
-    function goToPage2() {
+    function goPage2() {
         document.getElementById('page1').classList.remove('active');
         document.getElementById('page2').classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -556,13 +453,9 @@
 
     // Set CTA link with params on page load
     document.addEventListener('DOMContentLoaded', () => {
-        const baseUrl = 'https://rewardsrock.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpLWIiLCJ1IjoiNjgxZTE1ODE1ZTM2NWM2NDhjNGQwNzk1IiwidHMiOjE3NzI2NjA0Mzc2ODh9?s2=hope-wait-setting-one';
+        const baseUrl = 'https://taptrks.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY4MWUxNTgxNWUzNjVjNjQ4YzRkMDc5NSIsInRzIjoxNzcyNzUzOTkyNTU5fQ?s2=sam-so-dumb-one';
         document.getElementById('ctaBtn').href = appendUrlParams(baseUrl);
     });
 </script>
 </body>
 </html>
-
-
-
-
