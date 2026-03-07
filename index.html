@@ -12,8 +12,8 @@
             to   { opacity: 1; transform: translateY(0); }
         }
         @keyframes btnPulse {
-            0%, 100% { box-shadow: 0 0 28px rgba(74,222,128,0.5); }
-            50%       { box-shadow: 0 0 52px rgba(74,222,128,0.85); }
+            0%, 100% { box-shadow: 0 0 28px rgba(249,115,22,0.5); }
+            50%       { box-shadow: 0 0 52px rgba(249,115,22,0.85); }
         }
         @keyframes popIn {
             0%   { transform: scale(0.6); opacity: 0; }
@@ -21,22 +21,19 @@
             100% { transform: scale(1);   opacity: 1; }
         }
         @keyframes iconGlow {
-            0%, 100% { box-shadow: 0 8px 40px rgba(74,222,128,0.4); }
-            50%       { box-shadow: 0 8px 65px rgba(74,222,128,0.7); }
+            0%, 100% { box-shadow: 0 8px 40px rgba(249,115,22,0.4); }
+            50%       { box-shadow: 0 8px 65px rgba(249,115,22,0.75); }
         }
 
-        html {
-            height: 100%;
-        }
+        html { height: 100%; }
 
         body {
             min-height: 100%;
-            /* Full-screen dark background with centered green glow */
-            background-color: #050c07;
+            background-color: #0c0702;
             background-image:
                 radial-gradient(ellipse 80% 55% at 50% 0%,
-                    rgba(10, 80, 40, 0.75) 0%,
-                    rgba(5, 30, 15, 0.5) 45%,
+                    rgba(120, 50, 5, 0.75) 0%,
+                    rgba(40, 15, 3, 0.5) 45%,
                     transparent 70%);
             background-attachment: fixed;
             background-size: 100% 100%;
@@ -90,7 +87,7 @@
             line-height: 1.05;
             letter-spacing: -1.5px;
             margin-bottom: 22px;
-            background: linear-gradient(165deg, #c5d5cb 0%, #4ade80 60%);
+            background: linear-gradient(165deg, #fcd9b0 0%, #f97316 60%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -98,7 +95,7 @@
 
         .sub {
             font-size: 16.5px;
-            color: #7a9a88;
+            color: #8a6040;
             text-align: center;
             line-height: 1.65;
             margin-bottom: 56px;
@@ -112,10 +109,10 @@
             gap: 14px;
         }
 
-        .btn-green {
+        .btn-orange {
             width: 100%;
             padding: 22px 20px;
-            background: #4ade80;
+            background: #f97316;
             border: none;
             border-radius: 20px;
             cursor: pointer;
@@ -123,33 +120,33 @@
             animation: btnPulse 2.8s ease-in-out infinite;
             transition: transform 0.13s;
         }
-        .btn-green:active { transform: scale(0.97); }
+        .btn-orange:active { transform: scale(0.97); }
 
-        .btn-green .b-main {
+        .btn-orange .b-main {
             display: block;
             font-size: 20px;
             font-weight: 900;
-            color: #060e09;
+            color: #1a0900;
             margin-bottom: 5px;
         }
-        .btn-green .b-sub {
+        .btn-orange .b-sub {
             display: block;
             font-size: 13px;
-            color: rgba(6,14,9,0.55);
+            color: rgba(26,9,0,0.55);
             font-weight: 500;
         }
 
         .btn-dark {
             width: 100%;
             padding: 22px 20px;
-            background: #0d1c13;
-            border: 1.5px solid #1c2e22;
+            background: #150b04;
+            border: 1.5px solid #2c1a0a;
             border-radius: 20px;
             cursor: pointer;
             text-align: center;
             transition: border-color 0.2s, transform 0.13s;
         }
-        .btn-dark:hover  { border-color: rgba(74,222,128,0.3); }
+        .btn-dark:hover  { border-color: rgba(249,115,22,0.35); }
         .btn-dark:active { transform: scale(0.97); }
 
         .btn-dark .b-main {
@@ -162,7 +159,7 @@
         .btn-dark .b-sub {
             display: block;
             font-size: 13px;
-            color: #4b6358;
+            color: #5a3a1e;
             font-weight: 500;
         }
 
@@ -177,15 +174,15 @@
 
         .check-circle {
             width: 66px; height: 66px;
-            background: #4ade80;
+            background: #f97316;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 0 30px rgba(74,222,128,0.6);
+            box-shadow: 0 0 30px rgba(249,115,22,0.65);
         }
         .check-circle svg {
             width: 32px; height: 32px;
-            stroke: #060e09;
+            stroke: #1a0900;
             stroke-width: 3.5;
             fill: none;
             stroke-linecap: round;
@@ -196,7 +193,7 @@
             font-size: 52px;
             font-weight: 900;
             letter-spacing: -1px;
-            background: linear-gradient(165deg, #c5d5cb 0%, #4ade80 60%);
+            background: linear-gradient(165deg, #fcd9b0 0%, #f97316 60%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -204,7 +201,7 @@
 
         .qualified {
             font-size: 16px;
-            color: #7a9a88;
+            color: #8a6040;
             text-align: center;
             line-height: 1.7;
             margin-bottom: 34px;
@@ -214,7 +211,7 @@
         .btn-download {
             width: 100%;
             padding: 22px 28px;
-            background: #4ade80;
+            background: #f97316;
             border: none;
             border-radius: 20px;
             cursor: pointer;
@@ -228,28 +225,28 @@
             margin-bottom: 28px;
         }
         .btn-download:active { transform: scale(0.97); }
-        .btn-download svg { width: 26px; height: 26px; fill: #060e09; flex-shrink: 0; }
+        .btn-download svg { width: 26px; height: 26px; fill: #1a0900; flex-shrink: 0; }
         .dl-text {
             font-size: 21px;
             font-weight: 900;
-            color: #060e09;
+            color: #1a0900;
             letter-spacing: 1.5px;
         }
 
         /* Journey Card */
         .journey-card {
             width: 100%;
-            background: #0d1c13;
+            background: #130800;
             border-radius: 22px;
             padding: 26px 20px 10px;
             margin-bottom: 22px;
-            border: 1px solid #172519;
+            border: 1px solid #2a1205;
         }
         .journey-label {
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 2.5px;
-            color: #4b6358;
+            color: #5a3a1e;
             text-align: center;
             margin-bottom: 20px;
             text-transform: uppercase;
@@ -259,18 +256,18 @@
             align-items: flex-start;
             gap: 16px;
             padding: 18px 0;
-            border-top: 1px solid #172519;
+            border-top: 1px solid #2a1205;
         }
         .step:first-of-type { border-top: none; }
 
         .step-num {
             width: 34px; height: 34px;
-            background: #4ade80;
+            background: #f97316;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             font-size: 16px;
             font-weight: 900;
-            color: #060e09;
+            color: #1a0900;
             flex-shrink: 0;
             margin-top: 1px;
         }
@@ -282,14 +279,14 @@
         }
         .step-desc {
             font-size: 13.5px;
-            color: #527060;
+            color: #6b4025;
             line-height: 1.5;
         }
 
         /* Important Box */
         .important-box {
             width: 100%;
-            background: #0d1c13;
+            background: #130800;
             border: 1.5px solid #b91c1c;
             border-radius: 18px;
             padding: 22px 18px 20px;
@@ -322,14 +319,14 @@
         }
         .imp-desc {
             font-size: 14px;
-            color: #527060;
+            color: #6b4025;
             line-height: 1.7;
         }
-        .imp-desc strong { color: #4ade80; font-weight: 800; }
+        .imp-desc strong { color: #f97316; font-weight: 800; }
 
         .trusted {
             font-size: 13px;
-            color: #354e3e;
+            color: #4a2a10;
             text-align: center;
         }
 
@@ -348,7 +345,7 @@
     <div class="page active" id="page1">
 
         <div class="app-icon">
-            <img src="https://i.imgur.com/1UmZT5o.png" alt="Freecash">
+            <img src="https://i.imgur.com/3YqaQPB.png" alt="App Logo">
         </div>
 
         <h1 class="headline">Get Paid to Scroll</h1>
@@ -356,7 +353,7 @@
         <p class="sub">Join thousands earning daily by completing offers and cashing out instantly.</p>
 
         <div class="btn-stack">
-            <button class="btn-green" onclick="goPage2()">
+            <button class="btn-orange" onclick="goPage2()">
                 <span class="b-main">I'm over 21</span>
                 <span class="b-sub">Instant Payouts: PayPal, CashApp, Venmo, Crypto &amp; Wire</span>
             </button>
@@ -372,7 +369,7 @@
     <div class="page" id="page2">
 
         <div class="app-icon">
-            <img src="https://i.imgur.com/1UmZT5o.png" alt="Freecash">
+            <img src="https://i.imgur.com/3YqaQPB.png" alt="App Logo">
         </div>
 
         <div class="youre-in-row">
@@ -399,7 +396,7 @@
             <div class="step">
                 <div class="step-num">1</div>
                 <div>
-                    <div class="step-title">Download the Freecash App</div>
+                    <div class="step-title">Download the App</div>
                     <div class="step-desc">Available on iOS &amp; Android — Takes less than 60 seconds</div>
                 </div>
             </div>
@@ -453,11 +450,9 @@
 
     // Set CTA link with params on page load
     document.addEventListener('DOMContentLoaded', () => {
-        const baseUrl = 'https://rainawards.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY4MWUxNTgxNWUzNjVjNjQ4YzRkMDc5NSIsInRzIjoxNzcyNzc4MjkxMDAwfQ?s2=sam-8mon-one';
+        const baseUrl = 'https://raintrks.com/r/eyJ0Ijoic2NyYW1ibHktY3BlIiwidSI6IjY4MWUxNTgxNWUzNjVjNjQ4YzRkMDc5NSIsInRzIjoxNzcyOTE4MzM5MTUxfQ?s2=sam-try-one';
         document.getElementById('ctaBtn').href = appendUrlParams(baseUrl);
     });
 </script>
 </body>
 </html>
-
-
